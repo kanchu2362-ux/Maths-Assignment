@@ -16,7 +16,6 @@ def gauss_seidel_app():
 
     st.write("Enter coefficients row-wise")
 
-    # Default Example Matrix
     default_rows = [
         "10 -1 2",
         "-1 11 -1",
@@ -49,7 +48,6 @@ def gauss_seidel_app():
 
             A.append(values)
 
-    # Default values
     b_input = st.text_input(
         "Constant Terms (b)",
         value="6 25 -11"
@@ -76,9 +74,7 @@ def gauss_seidel_app():
         try:
 
             if len(A) != n:
-                st.error(
-                    "Enter all rows"
-                )
+                st.error("Enter all rows")
                 return
 
             A = np.array(A)
@@ -112,9 +108,7 @@ def gauss_seidel_app():
                     )
 
                     x_new[i] = (
-                        b[i]
-                        - s1
-                        - s2
+                        b[i] - s1 - s2
                     ) / A[i][i]
 
                 error = np.linalg.norm(
@@ -124,7 +118,10 @@ def gauss_seidel_app():
 
                 iterations.append(
                     [k+1]
-                    + [round(float(val),4) for val in x_new]
+                    + [
+                        round(float(val),4)
+                        for val in x_new
+                    ]
                     + [round(float(error),6)]
                 )
 
@@ -147,8 +144,6 @@ def gauss_seidel_app():
             st.subheader("Iteration Table")
 
             st.dataframe(df)
-
-            # ✅ Final Solution Formatting (FIXED)
 
             solution = [
                 f"{float(val):.4f}"
